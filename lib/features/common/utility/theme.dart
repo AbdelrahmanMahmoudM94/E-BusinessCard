@@ -139,7 +139,7 @@ class AppTheme {
             borderSide: BorderSide(color: Palette.grey_C6C6C6)),
         focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
-            borderSide: BorderSide(color: Palette.grey_C6C6C6)),
+            borderSide: BorderSide(color: Palette.black)),
         border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20),
             borderSide: BorderSide(color: Palette.grey_C6C6C6))),

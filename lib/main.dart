@@ -78,6 +78,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       minTextAdapt: false,
+      useInheritedMediaQuery: false,
       designSize: const Size(430, 896),
       builder: (BuildContext context, Widget? child) {
         _getThemeMode();

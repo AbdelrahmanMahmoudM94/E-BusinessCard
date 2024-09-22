@@ -28,6 +28,7 @@ class AuthInterceptor extends Interceptor {
     }
     //  options.headers["Content-Type"] = "application/json";
     options.headers["Accept"] = "application/json";
+    options.headers["Content-Type"] = "application/json";
     options.headers["Connection"] = "keep-alive";
 
     // if (options.headers["x-api-key"] == null) {
@@ -58,6 +59,7 @@ class AuthInterceptor extends Interceptor {
           await LocalData.setMobKey(mobKey);
 
           handler.resolve(await _dio.fetch(err.requestOptions));
+          return;
         } else {
           ViewsToolbox.dismissLoading();
           handler.reject(err);
@@ -72,13 +74,12 @@ class AuthInterceptor extends Interceptor {
   }
 
   Future<String> getMobKey({required String token}) async {
-    Dio _dio = Dio();
     try {
       Response result = await _dio.post(
         ApiConstants.getMobKey,
         data: jsonEncode(token),
         options: Options(headers: <String, dynamic>{
-          "x-api-key": "AEEB6FC5-4B05-4175-B945-BA85180A4650"
+          "x-api-key": "AEEB6FC5-4B05-4175-B945-BA85180A4650",
         }),
       );
 

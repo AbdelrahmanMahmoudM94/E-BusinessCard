@@ -18,17 +18,18 @@ class TextAreaFieldWidget extends StatelessWidget {
     this.labelAboveField,
     this.maxLines,
     this.controller,
+    this.onSubmitted,
   });
   final String keyName;
   final String? labelAboveField;
   final String? hintText;
   final String? Function(String?)? validator;
   final TextStyle? hintStyle;
-
+  final void Function(String?)? onSubmitted;
   final Widget? suffixIcon;
   final EdgeInsetsGeometry? contentPadding;
   final int? maxLines;
-     final TextEditingController? controller;
+  final TextEditingController? controller;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -44,9 +45,11 @@ class TextAreaFieldWidget extends StatelessWidget {
               ? EdgeInsets.only(top: 10.h)
               : EdgeInsets.zero,
           child: FormBuilderTextField(
+            textInputAction: TextInputAction.done,
             maxLines: maxLines ?? 9,
             controller: controller,
             name: keyName,
+            onSubmitted: onSubmitted,
             validator: validator,
             decoration: InputDecoration(
                 border: InputBorder.none,

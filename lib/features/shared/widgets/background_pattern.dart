@@ -28,36 +28,22 @@ class BackgroundPattern extends StatelessWidget {
       onTap: () => FocusManager.instance.primaryFocus!.unfocus(),
       child: Scaffold(
           resizeToAvoidBottomInset: false,
-          body: Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: SingleChildScrollView(
-              physics: MediaQuery.of(context).viewInsets.bottom > 0
-                  ? ClampingScrollPhysics()
-                  : NeverScrollableScrollPhysics(),
-              child: Column(
-                children: <Widget>[
-                  Stack(
-                    children: <Widget>[
-                      patternExtension == PatternExtension.svg
-                          ? SvgPicture.asset(
-                              path,
-                              width: 1.sw,
-                              fit: BoxFit.cover,
-                            )
-                          : Image.asset(
-                              path,
-                              width: 1.sw,
-                              height: patternHeight,
-                              fit: BoxFit.cover,
-                            ),
-                      widget
-                    ],
-                  ),
-                ],
-              ),
-            ),
+          body: Stack(
+            children: <Widget>[
+              patternExtension == PatternExtension.svg
+                  ? SvgPicture.asset(
+                      path,
+                      width: 1.sw,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.asset(
+                      path,
+                      width: 1.sw,
+                      height: patternHeight,
+                      fit: BoxFit.cover,
+                    ),
+              widget
+            ],
           )),
     );
   }

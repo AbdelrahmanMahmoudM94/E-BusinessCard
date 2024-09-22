@@ -90,56 +90,67 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
             ),
           ),
           10.heightBox,
-          Container(
-            color: AppTheme.isDarkMode(context) ? Palette.black : Palette.white,
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  25.heightBox,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Expanded(
+            child: Container(
+              color:
+                  AppTheme.isDarkMode(context) ? Palette.black : Palette.white,
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
+                ),
+                child: SingleChildScrollView(
+                  child: Column(
                     children: <Widget>[
-                      Tag(
-                        text: context.tr("myDetails"),
-                        onTap: () {
-                          _pageController.jumpToPage(0);
-                          setState(() {
-                            _myDetailsActive = true;
-                            _socialMedia = false;
-                          });
-                        },
-                        isSelected: _myDetailsActive,
-                        dividerWidth: 0.23.sw,
+                      25.heightBox,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Tag(
+                            text: context.tr("myDetails"),
+                            onTap: () {
+                              _pageController.jumpToPage(0);
+                              setState(() {
+                                _myDetailsActive = true;
+                                _socialMedia = false;
+                              });
+                            },
+                            isSelected: _myDetailsActive,
+                            dividerWidth: 0.23.sw,
+                          ),
+                          Tag(
+                            text: context.tr("socialMedia"),
+                            onTap: () {
+                              _pageController.jumpToPage(1);
+                              setState(() {
+                                _myDetailsActive = false;
+                                _socialMedia = true;
+                              });
+                            },
+                            dividerWidth: 0.28.sw,
+                            isSelected: _socialMedia,
+                          )
+                        ],
                       ),
-                      Tag(
-                        text: context.tr("socialMedia"),
-                        onTap: () {
-                          _pageController.jumpToPage(1);
-                          setState(() {
-                            _myDetailsActive = false;
-                            _socialMedia = true;
-                          });
-                        },
-                        dividerWidth: 0.28.sw,
-                        isSelected: _socialMedia,
-                      )
+                      5.heightBox,
+                      Divider(
+                        color: Palette.grey_858c9e,
+                        thickness: 1,
+                      ),
+                      20.heightBox,
+                      ExpandablePageView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        controller: _pageController,
+                        children: <Widget>[
+                          MyDetailsWidget(),
+                          SocialMediaWidget()
+                        ],
+                      ),
                     ],
                   ),
-                  5.heightBox,
-                  Divider(
-                    color: Palette.grey_858c9e,
-                    thickness: 1,
-                  ),
-                  20.heightBox,
-                  ExpandablePageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    controller: _pageController,
-                    children: <Widget>[MyDetailsWidget(), SocialMediaWidget()],
-                  ),
-                ],
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

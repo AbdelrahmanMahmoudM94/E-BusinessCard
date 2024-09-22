@@ -38,6 +38,8 @@ class MyDetailsWidget extends StatelessWidget {
           child: TextAreaFieldWidget(
             maxLines: 8,
             keyName: "hrRequest",
+            onSubmitted: (String? p0) =>
+                FocusManager.instance.primaryFocus!.unfocus(),
             hintText: context.tr("yourRequestHere"),
             hintStyle: TextStyle(
                 color: AppTheme.inDarkMode(context,
@@ -47,7 +49,7 @@ class MyDetailsWidget extends StatelessWidget {
             contentPadding: EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
           ),
         ),
-        40.heightBox,
+        30.heightBox,
         CustomElevatedButton(
           onPressed: () {},
           height: 64.h,
@@ -58,7 +60,7 @@ class MyDetailsWidget extends StatelessWidget {
           borderColor: Colors.transparent,
           gradient: LinearGradient(
               colors: <Color>[Palette.blue_0DBDFF, Palette.blue_05A3DF]),
-        )
+        ),
       ],
     );
   }
