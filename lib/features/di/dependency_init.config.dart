@@ -13,6 +13,16 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:karty/core/network/network_helper.dart' as _i474;
 import 'package:karty/features/di/register_module.dart' as _i828;
+import 'package:karty/features/edit_profile/data/data_sources/edit_profile_data_sources.dart'
+    as _i578;
+import 'package:karty/features/edit_profile/data/repositories/edit_profile_repository_imp.dart'
+    as _i483;
+import 'package:karty/features/edit_profile/domain/repositories/edit_profile_repository.dart'
+    as _i1000;
+import 'package:karty/features/edit_profile/domain/use_cases/edit_profile_use_case.dart'
+    as _i659;
+import 'package:karty/features/edit_profile/presentation/cubit/edit_profile_cubit.dart'
+    as _i620;
 import 'package:karty/features/login/data/data_sources/login_data_sources.dart'
     as _i556;
 import 'package:karty/features/login/data/repositories/login_repository_imp.dart'
@@ -46,7 +56,6 @@ import 'package:karty/features/share_cards/domain/use_cases/get_contact_details_
 import 'package:karty/features/share_cards/presentation/cubit/cubit/share_card_cubit.dart'
     as _i545;
 import 'package:karty/features/shared/cubit/language/theme_cubit.dart' as _i630;
-
 import 'package:karty/features/splash/data/data_sources/splash_data_sources.dart'
     as _i666;
 import 'package:karty/features/splash/data/repositories/splash_repository_imp.dart'
@@ -67,7 +76,6 @@ Future<_i174.GetIt> $initGetIt(
     environmentFilter,
   );
   final registerModule = _$RegisterModule();
-
   gh.factory<_i630.ThemeCubit>(() => _i630.ThemeCubit());
   await gh.singletonAsync<_i460.SharedPreferences>(
     () => registerModule.prefs,
@@ -82,6 +90,8 @@ Future<_i174.GetIt> $initGetIt(
   gh.factory<_i474.NetworkHelper>(() => _i474.NetworkHelper(gh<_i361.Dio>()));
   gh.factory<_i719.MoreRemoteDataSource>(
       () => _i719.MoreRemoteDataSourceImpl(gh<_i474.NetworkHelper>()));
+  gh.factory<_i578.EditProfileRemoteDataSource>(
+      () => _i578.EditProfileDataSourceImpl(gh<_i474.NetworkHelper>()));
   gh.factory<_i953.MoreRepository>(() => _i234.MoreRepositoryImp(
       moreRemoteDataSource: gh<_i719.MoreRemoteDataSource>()));
   gh.factory<_i556.LoginRemoteDataSource>(
@@ -94,6 +104,12 @@ Future<_i174.GetIt> $initGetIt(
       splashRemoteDataSource: gh<_i666.SplashRemoteDataSource>()));
   gh.factory<_i161.LoginRepository>(() => _i378.LoginRepositoryImp(
       loginRemoteDataSource: gh<_i556.LoginRemoteDataSource>()));
+  gh.factory<_i1000.EditProfileRepository>(() => _i483.EditProfileRepositoryImp(
+      editProfileRemoteDataSource: gh<_i578.EditProfileRemoteDataSource>()));
+  gh.factory<_i659.EditProfileUseCase>(() => _i659.EditProfileUseCase(
+      editProfileRepository: gh<_i1000.EditProfileRepository>()));
+  gh.factory<_i620.EditProfileCubit>(() => _i620.EditProfileCubit(
+      editProfileUseCase: gh<_i659.EditProfileUseCase>()));
   gh.factory<_i1010.GetAllFaqListUseCase>(() =>
       _i1010.GetAllFaqListUseCase(moreRepository: gh<_i953.MoreRepository>()));
   gh.factory<_i693.ShareCardRepository>(() => _i33.ShareCardRepositoryImp(
