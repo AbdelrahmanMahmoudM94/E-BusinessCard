@@ -1,0 +1,64 @@
+{
+    "data": 
+    {
+    "data":[
+      {
+        "question": "Which e-mail ID/credentials should I use to login the application?",
+        "answer": "Please use Diyar Microsoft account credentials to login"
+      },
+      {
+        "question": "How do I change my password?",
+        "answer": "Please change the system password which will reflect for this application as well. For more information: https://pss.diyarme.com"
+      },
+      {
+        "question": "How can I share my eBusiness card?",
+        "answer": "Please click Share button from Profile page to share your business card"
+      },
+      {
+        "question": "Can I scan other personnels' QR code?",
+        "answer": "Yes, please use Scan option in the application. This application will automatically scan the personnel's information and will ask for your confirmation to be added to Phone contact"
+      },
+      {
+        "question": "How do I update my information?",
+        "answer": "Please navigate to Request Profile update page or click on the edit button from the profile page"
+      },
+      {
+        "question": "How long the request will take to approve and to view updated changes in my profile?",
+        "answer": "This will depend on HR approval/disapproval of the request. It shall get reflected in around 2 weeks."
+      },
+      {
+        "question": "How do I update my photo?",
+        "answer": "Please send a request to HRD@diyarme.com"
+      },
+      {
+        "question": "How can I view my QR code?",
+        "answer": "Please navigate to Profile page and click on My QR code"
+      },
+      {
+        "question": "How do I request for additional roles to be reflected in my Profile?",
+        "answer": "Please send a mail to HRD@diyarme.com & Diyar_eBusinesscard@diyarme.com"
+      },
+      {
+        "question": "How do I change my social media accounts?",
+        "answer": "Please navigate to Request Profile update page and click on Social Media tab, where you can update links of social media. Please note the links should be for official purposes only."
+      },
+      {
+        "question": "How to change language?",
+        "answer": "Please go to settings to change the language between English, Arabic. Also, it can be changed from the icon present in the login page."
+      },
+      {
+        "question": "What are Key cards?",
+        "answer": "These are the cards of key personnels in the organization whose cards are frequently shared. You can also use this tab to search an employee and share their card."
+      },
+      {
+        "question": "How can I share cards of other employees in the same organization?",
+        "answer": "Please navigate to Key cards, search an employee by their name/e-mail ID and use Share option to share it further"
+      },
+      {
+        "question": "Whom can we reach out to for any technical issues with the application?",
+        "answer": "Please send a mail to Diyar_eBusinesscard@diyarme.com with the screenshot of errors"
+      }
+    ]
+  }
+  }
+  
