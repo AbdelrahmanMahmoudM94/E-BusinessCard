@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:karty/features/common/extensions/size_extensions.dart';
 import 'package:karty/features/common/utility/palette.dart';
-import 'package:karty/features/profile/presentation/widgets/profile_personal_data_widget.dart';
 import 'package:karty/features/share_cards/domain/entities/contact_profile_entity.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
 import 'package:super_tooltip/super_tooltip.dart';

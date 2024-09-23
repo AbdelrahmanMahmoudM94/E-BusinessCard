@@ -1,7 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider_plus/carousel_controller.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,11 +9,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:karty/features/common/extensions/size_extensions.dart';
 import 'package:karty/features/common/helper/language_helper.dart';
 import 'package:karty/features/common/helper/view_toolbox.dart';
-
 import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/di/dependency_init.dart';
-import 'package:karty/features/profile/presentation/widgets/profile_card_list_widget.dart';
-import 'package:karty/features/profile/presentation/widgets/profile_personal_data_widget.dart';
+import 'package:karty/features/home_profile/presentation/widgets/profile_card_list_widget.dart';
+import 'package:karty/features/home_profile/presentation/widgets/profile_personal_data_widget.dart';
 import 'package:karty/features/routes/route_sevices.dart';
 import 'package:karty/features/share_cards/data/models/request/contact_details_request.dart';
 import 'package:karty/features/share_cards/domain/entities/contact_profile_entity.dart';

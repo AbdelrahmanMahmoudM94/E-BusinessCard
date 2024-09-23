@@ -1,13 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/common/utility/theme.dart';
 import 'package:karty/features/routes/routes.gr.dart';
-import 'package:karty/features/shared/cubit/language/theme_cubit.dart';
 
 @RoutePage()
 class NavigationMainScreen extends StatefulWidget {
@@ -37,7 +35,7 @@ class _NavigationMainScreenState extends State<NavigationMainScreen> {
       child: AutoTabsScaffold(
         resizeToAvoidBottomInset: false,
         routes: <PageRouteInfo>[
-          const ProfileRoute(),
+          const HomeProfileRoute(),
           ScanRoute(),
           const ShareCardsRoute(),
           const MoreRoute()

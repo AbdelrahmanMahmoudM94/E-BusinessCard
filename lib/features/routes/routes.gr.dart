@@ -12,15 +12,15 @@ import 'package:auto_route/auto_route.dart' as _i12;
 import 'package:flutter/material.dart' as _i14;
 import 'package:karty/features/edit_profile/presentation/screens/edit_profile_screen.dart'
     as _i2;
-import 'package:karty/features/login/presentation/screens/login_screen.dart'
+import 'package:karty/features/home_profile/presentation/screens/home_profile_screen.dart'
     as _i4;
+import 'package:karty/features/login/presentation/screens/login_screen.dart'
+    as _i5;
 import 'package:karty/features/more/presentation/screens/faq_screens.dart'
     as _i3;
 import 'package:karty/features/more/presentation/screens/more_screen.dart'
-    as _i5;
-import 'package:karty/features/navigation_bottom/navigation_bottom.dart' as _i6;
-import 'package:karty/features/profile/presentation/screens/profile_screen.dart'
-    as _i7;
+    as _i6;
+import 'package:karty/features/navigation_bottom/navigation_bottom.dart' as _i7;
 import 'package:karty/features/scan/domain/entities/qr_scaned_data.dart'
     as _i15;
 import 'package:karty/features/scan/presentation/screens/scan_result_screen.dart'
@@ -110,7 +110,26 @@ class FaqRoutes extends _i12.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.LoginScreen]
+/// [_i4.HomeProfileScreen]
+class HomeProfileRoute extends _i12.PageRouteInfo<void> {
+  const HomeProfileRoute({List<_i12.PageRouteInfo>? children})
+      : super(
+          HomeProfileRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'HomeProfileRoute';
+
+  static _i12.PageInfo page = _i12.PageInfo(
+    name,
+    builder: (data) {
+      return const _i4.HomeProfileScreen();
+    },
+  );
+}
+
+/// generated route for
+/// [_i5.LoginScreen]
 class LoginRoute extends _i12.PageRouteInfo<void> {
   const LoginRoute({List<_i12.PageRouteInfo>? children})
       : super(
@@ -123,13 +142,13 @@ class LoginRoute extends _i12.PageRouteInfo<void> {
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i4.LoginScreen();
+      return const _i5.LoginScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i5.MoreScreen]
+/// [_i6.MoreScreen]
 class MoreRoute extends _i12.PageRouteInfo<void> {
   const MoreRoute({List<_i12.PageRouteInfo>? children})
       : super(
@@ -142,13 +161,13 @@ class MoreRoute extends _i12.PageRouteInfo<void> {
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i5.MoreScreen();
+      return const _i6.MoreScreen();
     },
   );
 }
 
 /// generated route for
-/// [_i6.NavigationMainScreen]
+/// [_i7.NavigationMainScreen]
 class NavigationMainRoute extends _i12.PageRouteInfo<void> {
   const NavigationMainRoute({List<_i12.PageRouteInfo>? children})
       : super(
@@ -161,26 +180,7 @@ class NavigationMainRoute extends _i12.PageRouteInfo<void> {
   static _i12.PageInfo page = _i12.PageInfo(
     name,
     builder: (data) {
-      return const _i6.NavigationMainScreen();
-    },
-  );
-}
-
-/// generated route for
-/// [_i7.ProfileScreen]
-class ProfileRoute extends _i12.PageRouteInfo<void> {
-  const ProfileRoute({List<_i12.PageRouteInfo>? children})
-      : super(
-          ProfileRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'ProfileRoute';
-
-  static _i12.PageInfo page = _i12.PageInfo(
-    name,
-    builder: (data) {
-      return const _i7.ProfileScreen();
+      return const _i7.NavigationMainScreen();
     },
   );
 }
