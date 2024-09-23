@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/foundation.dart';
 import 'package:karty/core/network/api/network_apis_constants.dart';
 import 'package:karty/core/network/base_handling.dart';
 import 'package:karty/core/network/exception/error_status.dart';
@@ -22,7 +23,7 @@ class AuthInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final String? mobKey = LocalData.getMobKey();
-    Log.d("mobKey:$mobKey" ?? "");
+
     if (mobKey != null) {
       options.headers["mobKey"] = "$mobKey";
     }
@@ -35,7 +36,8 @@ class AuthInterceptor extends Interceptor {
     //   options.headers["mobKey"] =
     //       "D9GVHLI49G+ZNuv5ScCE3HKfaasvzX0bR7TAqQzuXeO3hRlZd2+d3KF6o8fiLevyKTk3zHkScdT+3wB1YdByN3kxoxSleSRdEX6fPKTcLiJFhWw36YkoRsCbqFzwkZl4XqS6cZut0ujISvFLixwG4pKkZQOo/Sz9tscKl8RmLKZVgIrtqlR3cH5AHFtro9ik+VYU7HytQQ8Bfvs2x9kD3uQX3JaZjKa+Gk5TzyNmLqxm+zLK5Tu6zWz5jGyJit/Eav+SMqPHR2p+Ayt2zcafo+hQOhgADbgsHfzx62PQeqAr4XxriPIgkqxdUPPi77SyQN0CADCE83M=";
     // }
-    super.onRequest(options, handler);
+   
+    handler.next(options);
   }
 
   @override
@@ -44,6 +46,12 @@ class AuthInterceptor extends Interceptor {
     ErrorInterceptorHandler handler,
   ) async {
     if (err.response?.statusCode == 429) {
+      _dio.interceptors.clear();
+      _dio.interceptors.addAll(<Interceptor>[
+        AuthInterceptor(),
+        if (kDebugMode) LoggingInterceptor(),
+      ]);
+
       return handler.resolve(await _dio.fetch(err.requestOptions));
     } else if ((err.response == null) ||
         (err.response?.data == "") ||
@@ -101,6 +109,7 @@ class LoggingInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+ 
     startTime = DateTime.now();
     Log.d("----------Request Start---------");
     Log.i(" path :${options.path}");
@@ -128,7 +137,7 @@ class LoggingInterceptor extends Interceptor {
     Log.w("RequestContentType:${options.contentType}");
     Log.w("RequestDataOptions:${options.data}");
 
-    return super.onRequest(options, handler);
+    super.onRequest(options, handler);
   }
 
   @override
@@ -137,6 +146,7 @@ class LoggingInterceptor extends Interceptor {
     //Request duration
     final int duration = endTime!.difference(startTime!).inMilliseconds;
     Log.i("----------End Request $duration millisecond---------");
+
     super.onResponse(response, handler);
   }
 
@@ -148,58 +158,4 @@ class LoggingInterceptor extends Interceptor {
 }
 
 //parsing data
-class AdapterInterceptor extends Interceptor {
-  static const String MSG = "msg";
-  static const String SLASH = "\"";
-  static const String MESSAGE = "message";
-  static const String ERROR = "validateError";
-
-  static const String DEFAULT = "\"NOT_FOUND\"";
-  static const String NOT_FOUND = "Some Thing Wrong Happened";
-
-  static const String FAILURE_FORMAT = "{\"code\":%d,\"message\":\"%s\"}";
-  static const String SUCCESS_FORMAT =
-      "{\"code\":0,\"data\":%s,\"message\":\"\"}";
-
-  @override
-  void onResponse(Response response, ResponseInterceptorHandler handler) {
-    final Response mResponse = adapterData(response);
-    return super.onResponse(mResponse, handler);
-  }
-
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    if (err.response != null) {
-      adapterData(err.response!);
-    }
-    return super.onError(err, handler);
-  }
-
-  Response adapterData(Response response) {
-    // String result;
-    // String content = response.data == null ? "" : response.data.toString();
-    // if (response.statusCode == ErrorStatus.SUCCESS) {
-    //   if (content.isEmpty) {
-    //     content = DEFAULT;
-    //   }
-    //   result = sprintf(SUCCESS_FORMAT, [content]);
-    //   response.statusCode = ErrorStatus.SUCCESS;
-    // } else if (response.statusCode == ErrorStatus.errorValidtion) {
-    //   result = sprintf(SUCCESS_FORMAT, [response.statusCode, content]);
-    //   response.statusCode = ErrorStatus.errorValidtion;
-    // } else {
-    //   result = sprintf(FAILURE_FORMAT, [response.statusCode, NOT_FOUND]);
-    //   response.statusCode = ErrorStatus.SUCCESS;
-    // }
-    if (response.statusCode == ErrorStatus.SUCCESS) {
-      Log.d("ResponseCode:${response.statusCode}");
-      Log.d("response:${response.data}");
-    } else {
-      Log.e("ResponseCode:${response.statusCode}");
-      Log.d("response:${response.data}");
-    }
-    // Log.json(result);
-    // response.data = result;
-    return response;
-  }
-}
+ 
