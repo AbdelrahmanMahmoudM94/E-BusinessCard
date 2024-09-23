@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:karty/features/edit_profile/domain/entities/profile_entity.dart';
+import 'package:karty/features/edit_profile/domain/entities/edit_profile_entity.dart';
 
 part 'edit_profile_request_model.g.dart';
 

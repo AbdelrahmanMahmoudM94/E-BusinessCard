@@ -4,9 +4,7 @@ abstract class EditProfileState {}
 
 final class EditProfileInitial extends EditProfileState {}
 
-final class EditProfileSuccessState extends EditProfileState {
-  EditProfileSuccessState();
-}
+class EditProfileSuccessState extends EditProfileState {}
 
 class EditProfileErrorState extends EditProfileState {
   EditProfileErrorState({this.message});

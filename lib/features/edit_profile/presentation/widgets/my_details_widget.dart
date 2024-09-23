@@ -9,14 +9,19 @@ import 'package:karty/features/common/utility/theme.dart';
 import 'package:karty/features/di/dependency_init.dart';
 import 'package:karty/features/edit_profile/data/models/request/edit_profile_request_model.dart';
 import 'package:karty/features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
-import 'package:karty/features/profile/presentation/widgets/profile_personal_data_widget.dart';
+import 'package:karty/features/home_profile/presentation/widgets/profile_personal_data_widget.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
 import 'package:karty/features/shared/widgets/custom_elevated_button_widget.dart';
 import 'package:karty/features/shared/widgets/forms/text_area_field_widget.dart';
 
-class MyDetailsWidget extends StatelessWidget {
+class MyDetailsWidget extends StatefulWidget {
   MyDetailsWidget({super.key});
 
+  @override
+  State<MyDetailsWidget> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<MyDetailsWidget> {
   EditProfileCubit _editProfileCubit = getIt<EditProfileCubit>();
   TextEditingController _hrRequestController = TextEditingController();
 
@@ -50,6 +55,11 @@ class MyDetailsWidget extends StatelessWidget {
                 maxLines: 8,
                 keyName: "hrRequest",
                 hintText: context.tr("yourRequestHere"),
+                onSubmitted: (String? value) {
+                  _editProfileCubit.editProfile(
+                      editProfileRequestModel: EditProfileRequestModel(
+                          comments: value, email: "F.Taha@diyarme.com"));
+                },
                 hintStyle: TextStyle(
                     color: AppTheme.inDarkMode(context,
                         dark: Palette.white, light: Palette.grey_8e95a4),
@@ -59,15 +69,20 @@ class MyDetailsWidget extends StatelessWidget {
                     EdgeInsets.only(left: 20.w, top: 40.h, right: 20.w),
               ),
             ),
-            40.heightBox,
+            30.heightBox,
             BlocConsumer<EditProfileCubit, EditProfileState>(
                 listener: (BuildContext context, EditProfileState state) {
               if (state is EditProfileLoadingState) {
                 ViewsToolbox.showLoading();
               } else if (state is EditProfileSuccessState) {
+                _hrRequestController.clear();
                 ViewsToolbox.dismissLoading();
+                ViewsToolbox.showAwesomeSnackBar(
+                    context, context.tr("request_sent_successfully"));
               } else if (state is EditProfileErrorState) {
                 ViewsToolbox.dismissLoading();
+                ViewsToolbox.showErrorAwesomeSnackBar(
+                    context, context.tr(state.message.toString()));
               }
             }, builder: (BuildContext context, EditProfileState state) {
               return CustomElevatedButton(
