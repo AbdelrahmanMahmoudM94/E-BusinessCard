@@ -1,29 +1,27 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/io.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
-import 'package:karty/core/network/api/network_apis_constants.dart';
 import 'package:karty/core/network/exception/exception_handle.dart';
 import 'package:karty/core/network/interceptors.dart';
-import 'package:karty/error/failure.dart';
-import 'package:karty/features/di/dependency_init.dart';
 import 'package:karty/features/shared/data/local_data.dart';
 
 @injectable
 class NetworkHelper {
   NetworkHelper(this.dio) {
-    dio.options.baseUrl = ApiConstants.baseUrl;
-    dio.interceptors.add(AuthInterceptor());
-    if (kDebugMode) {
-      dio.interceptors.add(LoggingInterceptor());
-    }
+    dio.interceptors.clear();
+    dio.interceptors.addAll(<Interceptor>[
+      AuthInterceptor(),
+      if (kDebugMode) LoggingInterceptor(),
+    ]);
+
+    // if (kDebugMode) {
+    //   dio.interceptors.add(LoggingInterceptor());
+    // }
     // _dio.interceptors.add(MyInterceptor());
   }
 
-  Dio dio;
+  final Dio dio;
 
   LocalData localData = LocalData();
 
