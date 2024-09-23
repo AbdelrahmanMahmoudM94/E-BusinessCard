@@ -98,7 +98,7 @@ Future<_i174.GetIt> $initGetIt(
 
   gh.lazySingleton<_i361.Dio>(
       () => registerModule.dio(gh<String>(instanceName: 'BaseUrl')));
-  gh.singleton<_i474.NetworkHelper>(() => _i474.NetworkHelper(gh<_i361.Dio>()));
+  gh.factory<_i474.NetworkHelper>(() => _i474.NetworkHelper(gh<_i361.Dio>()));
   gh.factory<_i588.HomeProfileRemoteDataSource>(
       () => _i588.ProfileDataSourceImpl(gh<_i474.NetworkHelper>()));
   gh.factory<_i719.MoreRemoteDataSource>(
@@ -120,7 +120,7 @@ Future<_i174.GetIt> $initGetIt(
   gh.factory<_i161.LoginRepository>(() => _i378.LoginRepositoryImp(
       loginRemoteDataSource: gh<_i556.LoginRemoteDataSource>()));
   gh.factory<_i103.HomeProfileUseCase>(() => _i103.HomeProfileUseCase(
-      homeProfileRepository: gh<_i949.HomeProfileRepository>()));
+      repoInstanceRepository: gh<_i949.HomeProfileRepository>()));
   gh.factory<_i1000.EditProfileRepository>(() => _i483.EditProfileRepositoryImp(
       editProfileRemoteDataSource: gh<_i578.EditProfileRemoteDataSource>()));
   gh.factory<_i659.EditProfileUseCase>(() => _i659.EditProfileUseCase(

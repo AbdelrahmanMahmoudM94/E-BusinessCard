@@ -2,8 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:karty/core/network/base_handling.dart';
 import 'package:karty/error/failure.dart';
+import 'package:karty/features/Home_profile/domain/entities/home_profile_entity.dart';
 import 'package:karty/features/Home_profile/domain/use_cases/Home_profile_use_case.dart';
-import 'package:karty/features/home_profile/data/models/response/home_profile_response_model.dart';
 import 'package:karty/features/shared/entity/base_entity.dart';
 
 import '../../data/models/request/home_profile_request_model.dart';
@@ -20,7 +20,7 @@ class HomeProfileCubit extends Cubit<HomeProfileState> {
       {required HomeProfileRequestModel homeProfileRequestModel}) async {
     emit(HomeProfileLoadingState());
 
-    final CustomResponseType<BaseEntity<HomeProfileResponseModel>>
+    final CustomResponseType<BaseEntity<HomeProfileEntity>>
         eitherPackagesOrFailure =
         await homeProfileUseCase(homeProfileRequestModel);
 
@@ -28,9 +28,9 @@ class HomeProfileCubit extends Cubit<HomeProfileState> {
       emit(HomeProfileErrorState(
         message: FailureToMassage().mapFailureToMessage(failure),
       ));
-    }, (BaseEntity<HomeProfileResponseModel> response) {
+    }, (BaseEntity<HomeProfileEntity> response) {
       if (response.data == true) {
-        emit(HomeProfileReadyState(homeProfileResponseModel: response.data!));
+        emit(HomeProfileReadyState(homeProfileEntity: response.data!));
       } else {
         emit(HomeProfileErrorState(
           message: response.message,

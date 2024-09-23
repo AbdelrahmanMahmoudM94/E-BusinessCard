@@ -10,15 +10,15 @@ import '../entities/home_profile_entity.dart';
 @injectable
 class HomeProfileUseCase
     implements UseCase<BaseEntity<HomeProfileEntity>, HomeProfileRequestModel> {
-  HomeProfileUseCase({required this.homeProfileRepository});
-
-  final HomeProfileRepository homeProfileRepository;
+  HomeProfileUseCase({required this.repoInstanceRepository});
+  final HomeProfileRepository repoInstanceRepository;
 
   @override
   Future<CustomResponseType<BaseEntity<HomeProfileEntity>>> call(
-      HomeProfileRequestModel homeProfileRequestModel) async {
-    return homeProfileRepository.getProfile(
-      homeProfileRequestModel: homeProfileRequestModel,
+    HomeProfileRequestModel paramsInstaneHere,
+  ) async {
+    return repoInstanceRepository.getProfile(
+      homeProfileRequestModel: paramsInstaneHere,
     );
   }
 }

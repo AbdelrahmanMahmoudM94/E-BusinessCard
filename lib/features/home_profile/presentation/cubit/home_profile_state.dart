@@ -14,7 +14,7 @@ class HomeProfileLoadingState extends HomeProfileState {}
 
 class HomeProfileReadyState extends HomeProfileState {
   HomeProfileReadyState({
-    required this.homeProfileResponseModel,
+    required this.homeProfileEntity,
     this.pageNumber,
     this.searchText,
     this.hasMorePages = false,
@@ -26,7 +26,7 @@ class HomeProfileReadyState extends HomeProfileState {
 
   int? pageNumber;
   final bool isLoading;
-  final HomeProfileResponseModel homeProfileResponseModel;
+  final HomeProfileEntity homeProfileEntity;
   final bool errorHappens;
   final String? searchText;
 }

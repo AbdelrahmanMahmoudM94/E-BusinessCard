@@ -15,7 +15,6 @@ import 'package:karty/features/home_profile/data/models/request/home_profile_req
 import 'package:karty/features/home_profile/presentation/cubit/home_profile_cubit.dart';
 import 'package:karty/features/home_profile/presentation/widgets/circle_actions_widget.dart';
 import 'package:karty/features/home_profile/presentation/widgets/profile_card_list_widget.dart';
-import 'package:karty/features/home_profile/presentation/widgets/profile_personal_data_widget.dart';
 import 'package:karty/features/routes/route_sevices.dart';
 import 'package:karty/features/routes/routes.gr.dart';
 import 'package:karty/features/share_cards/domain/entities/contact_profile_entity.dart';
@@ -105,13 +104,13 @@ class _ProfileScreenState extends State<HomeProfileScreen> {
                           ],
                         ),
                       ),
-                      ProfilePersonalDataWidget(
-                        name: state.homeProfileResponseModel.data!.name,
-                        companyName:
-                            state.homeProfileResponseModel.data!.company.name ??
-                                "Diyaar United Company",
-                        isStatic: true,
-                      ),
+                      // ProfilePersonalDataWidget(
+                      //   name: state.homeProfileEntity.data!.name,
+                      //   companyName:
+                      //       state.homeProfileEntity.data!.company.name ??
+                      //           "Diyaar United Company",
+                      //   isStatic: true,
+                      // ),
                       35.heightBox,
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
