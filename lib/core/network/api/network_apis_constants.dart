@@ -6,4 +6,8 @@ class ApiConstants {
   static String getAppConfig = "Pofile/AppConfiguration";
 
   static String editProfile = "Pofile/UpdateProfile";
+
+  static String editSocialMedia = "Pofile/UpdateSocialMedia";
+
+  static String profile = "Pofile/Data";
 }

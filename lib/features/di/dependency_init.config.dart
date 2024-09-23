@@ -21,8 +21,18 @@ import 'package:karty/features/edit_profile/domain/repositories/edit_profile_rep
     as _i1000;
 import 'package:karty/features/edit_profile/domain/use_cases/edit_profile_use_case.dart'
     as _i659;
+import 'package:karty/features/edit_profile/domain/use_cases/edit_social_media_use_case.dart'
+    as _i868;
 import 'package:karty/features/edit_profile/presentation/cubit/edit_profile_cubit.dart'
     as _i620;
+import 'package:karty/features/home_profile/data/data_sources/profile_data_sources.dart'
+    as _i588;
+import 'package:karty/features/home_profile/data/repositories/home_profile_repository_imp.dart'
+    as _i703;
+import 'package:karty/features/home_profile/domain/repositories/home_profile_repository.dart'
+    as _i949;
+import 'package:karty/features/home_profile/domain/use_cases/home_profile_use_case.dart'
+    as _i103;
 import 'package:karty/features/login/data/data_sources/login_data_sources.dart'
     as _i556;
 import 'package:karty/features/login/data/repositories/login_repository_imp.dart'
@@ -85,15 +95,20 @@ Future<_i174.GetIt> $initGetIt(
     () => registerModule.baseUrl,
     instanceName: 'BaseUrl',
   );
+
   gh.lazySingleton<_i361.Dio>(
       () => registerModule.dio(gh<String>(instanceName: 'BaseUrl')));
-  gh.factory<_i474.NetworkHelper>(() => _i474.NetworkHelper(gh<_i361.Dio>()));
+  gh.singleton<_i474.NetworkHelper>(() => _i474.NetworkHelper(gh<_i361.Dio>()));
+  gh.factory<_i588.HomeProfileRemoteDataSource>(
+      () => _i588.ProfileDataSourceImpl(gh<_i474.NetworkHelper>()));
   gh.factory<_i719.MoreRemoteDataSource>(
       () => _i719.MoreRemoteDataSourceImpl(gh<_i474.NetworkHelper>()));
   gh.factory<_i578.EditProfileRemoteDataSource>(
       () => _i578.EditProfileDataSourceImpl(gh<_i474.NetworkHelper>()));
   gh.factory<_i953.MoreRepository>(() => _i234.MoreRepositoryImp(
       moreRemoteDataSource: gh<_i719.MoreRemoteDataSource>()));
+  gh.factory<_i949.HomeProfileRepository>(() => _i703.HomeProfileRepositoryImp(
+      homeProfileRemoteDataSource: gh<_i588.HomeProfileRemoteDataSource>()));
   gh.factory<_i556.LoginRemoteDataSource>(
       () => _i556.LoginRemoteDataSourceImpl(gh<_i474.NetworkHelper>()));
   gh.factory<_i456.ShareCardRemoteDataSource>(
@@ -104,12 +119,14 @@ Future<_i174.GetIt> $initGetIt(
       splashRemoteDataSource: gh<_i666.SplashRemoteDataSource>()));
   gh.factory<_i161.LoginRepository>(() => _i378.LoginRepositoryImp(
       loginRemoteDataSource: gh<_i556.LoginRemoteDataSource>()));
+  gh.factory<_i103.HomeProfileUseCase>(() => _i103.HomeProfileUseCase(
+      homeProfileRepository: gh<_i949.HomeProfileRepository>()));
   gh.factory<_i1000.EditProfileRepository>(() => _i483.EditProfileRepositoryImp(
       editProfileRemoteDataSource: gh<_i578.EditProfileRemoteDataSource>()));
   gh.factory<_i659.EditProfileUseCase>(() => _i659.EditProfileUseCase(
       editProfileRepository: gh<_i1000.EditProfileRepository>()));
-  gh.factory<_i620.EditProfileCubit>(() => _i620.EditProfileCubit(
-      editProfileUseCase: gh<_i659.EditProfileUseCase>()));
+  gh.factory<_i868.EditSocialMediaUseCase>(() => _i868.EditSocialMediaUseCase(
+      editProfileRepository: gh<_i1000.EditProfileRepository>()));
   gh.factory<_i1010.GetAllFaqListUseCase>(() =>
       _i1010.GetAllFaqListUseCase(moreRepository: gh<_i953.MoreRepository>()));
   gh.factory<_i693.ShareCardRepository>(() => _i33.ShareCardRepositoryImp(
@@ -118,6 +135,10 @@ Future<_i174.GetIt> $initGetIt(
       _i544.MoreCubit(getAllFaqListUseCase: gh<_i1010.GetAllFaqListUseCase>()));
   gh.factory<_i434.GetAppConfigUseCase>(() =>
       _i434.GetAppConfigUseCase(loginRepository: gh<_i161.LoginRepository>()));
+  gh.factory<_i620.EditProfileCubit>(() => _i620.EditProfileCubit(
+        editProfileUseCase: gh<_i659.EditProfileUseCase>(),
+        editSocialMediaUseCase: gh<_i868.EditSocialMediaUseCase>(),
+      ));
   gh.factory<_i830.GetContactDetailsUseCase>(() =>
       _i830.GetContactDetailsUseCase(
           shareCardRepository: gh<_i693.ShareCardRepository>()));
