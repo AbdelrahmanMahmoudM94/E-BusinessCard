@@ -58,8 +58,6 @@ class HomeProfileCubit extends Cubit<HomeProfileState> {
         homeProfileEntity: currentHomeProfileReadyState.homeProfileEntity,
         isLoading: true));
 
-    emit(HomeProfileLoadingState());
-
     final CustomResponseType<BaseEntity<HomeProfileEntity>>
         eitherPackagesOrFailure =
         await homeProfileUseCase(homeProfileRequestModel);

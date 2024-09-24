@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:carousel_slider_plus/carousel_controller.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -24,6 +27,7 @@ import 'package:karty/features/shared/widgets/app_text.dart';
 import 'package:karty/features/shared/widgets/background_pattern.dart';
 import 'package:karty/features/shared/widgets/custom_elevated_button_widget.dart';
 import 'package:karty/features/shared/widgets/no_data_widget.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 @RoutePage()
 class HomeProfileScreen extends StatefulWidget {
@@ -36,7 +40,7 @@ class HomeProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<HomeProfileScreen> {
   late CarouselSliderController _carouselSliderController;
   HomeProfileCubit _homeProfileCubit = getIt<HomeProfileCubit>();
-
+  BuildContext? _qrContext;
   @override
   void initState() {
     _carouselSliderController = CarouselSliderController();
@@ -129,7 +133,7 @@ class _ProfileScreenState extends State<HomeProfileScreen> {
                         name: state.homeProfileEntity.name ?? "",
                         companyName: state.homeProfileEntity.company?.name ??
                             "Diyaar United Company",
-                        isStatic: true,
+                        socialMedias: state.homeProfileEntity.socialMedia,
                       ),
                       35.heightBox,
                       Padding(
@@ -152,7 +156,26 @@ class _ProfileScreenState extends State<HomeProfileScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           CustomElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              ViewsToolbox.showCustomDialog(
+                                  showCloseIcon: true,
+                                  dialogContext: context,
+                                  widgets: <Widget>[
+                                    ViewsToolbox.imageFromBase64String(
+                                      state.homeProfileEntity.profiles!
+                                          .firstWhere(
+                                              (HomeProfileItemResponseModel
+                                                      profile) =>
+                                                  profile.isDefault!)
+                                          .qrData!
+                                          .split(",")
+                                          .last,
+                                    ),
+                                  ],
+                                  getDialogContext: (BuildContext context) {
+                                    _qrContext = context;
+                                  });
+                            },
                             height: 64.h,
                             width: 180.w,
                             customChild: Row(
