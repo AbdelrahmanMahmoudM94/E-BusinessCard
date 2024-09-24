@@ -4,13 +4,13 @@ abstract class HomeProfileState {}
 
 final class HomeProfileInitial extends HomeProfileState {}
 
-class HomeProfileErrorState extends HomeProfileState {
+class HomeProfileLoadingState extends HomeProfileState {}
+
+final class HomeProfileErrorState extends HomeProfileState {
   HomeProfileErrorState({this.message});
 
   final String? message;
 }
-
-class HomeProfileLoadingState extends HomeProfileState {}
 
 class HomeProfileReadyState extends HomeProfileState {
   HomeProfileReadyState({

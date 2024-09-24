@@ -21,22 +21,16 @@ class ProfileDataSourceImpl implements HomeProfileRemoteDataSource {
   @override
   Future<CustomResponseType<HomeProfileResponseModel>> getProfile(
       {required HomeProfileRequestModel homeProfileRequestModel}) async {
-    final String? mobKey = LocalData.getMobKey();
-
-    ({dynamic response, bool success}) result = await networkHelper.post(
-        headers: <String, String>{
-          "mobKey": "$mobKey",
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "Connection": "keep-alive"
-        },
-        path: ApiConstants.profile,
-        data: <String, String>{
-          "email": homeProfileRequestModel.email ?? "",
-          "lang": homeProfileRequestModel.lang ?? "a"
-        });
+    ({dynamic response, bool success}) result = await networkHelper
+        .post(path: ApiConstants.profile, data: <String, String>{
+      "email": homeProfileRequestModel.email ?? "",
+      "lang": homeProfileRequestModel.lang ?? "a"
+    });
 
     if (result.success) {
+      // save profile data in local storage for offline use and in social media page to show the data.
+      LocalData.setHomeProfile(
+          HomeProfileResponseModel.fromJson(result.response));
       return right(HomeProfileResponseModel.fromJson(result.response));
     } else {
       return left(ServerFailure(message: result.response as String));

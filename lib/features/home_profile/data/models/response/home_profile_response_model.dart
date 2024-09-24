@@ -1,7 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:karty/features/edit_profile/data/models/response/edit_social_media_response_model.dart';
+import 'package:karty/features/home_profile/data/models/response/home_profile_item_response_model.dart';
 import 'package:karty/features/home_profile/domain/entities/home_profile_entity.dart';
 import 'package:karty/features/share_cards/data/models/response/company_response_model.dart';
+import 'package:karty/features/share_cards/data/models/response/social_media_response_model.dart';
 import 'package:karty/features/shared/entity/base_entity.dart';
 
 part 'home_profile_response_model.g.dart';
@@ -9,20 +10,16 @@ part 'home_profile_response_model.g.dart';
 @JsonSerializable()
 class HomeProfileModel extends HomeProfileEntity {
   HomeProfileModel(
-      {super.email,
-      super.lang,
+      {required super.email,
+      required super.lang,
       required super.name,
-      super.photo,
-      //   required this.profiles,
-      required this.company,
-      required this.socialMediaList});
+      required super.photo,
+      required super.company,
+      required super.profiles,
+      required super.socialMedia});
 
   factory HomeProfileModel.fromJson(Map<String, dynamic> json) =>
       _$HomeProfileModelFromJson(json);
-
-  final List<EditSocialMediaResponseModel> socialMediaList;
-  final CompanyResponseModel company;
-  //final List<homeProfileItemResponseModel> profiles;
 
   Map<String, dynamic> toJson() => _$HomeProfileModelToJson(this);
 }

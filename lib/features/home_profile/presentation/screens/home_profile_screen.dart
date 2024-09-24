@@ -12,15 +12,18 @@ import 'package:karty/features/common/helper/view_toolbox.dart';
 import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/di/dependency_init.dart';
 import 'package:karty/features/home_profile/data/models/request/home_profile_request_model.dart';
+import 'package:karty/features/home_profile/data/models/response/home_profile_item_response_model.dart';
 import 'package:karty/features/home_profile/presentation/cubit/home_profile_cubit.dart';
 import 'package:karty/features/home_profile/presentation/widgets/circle_actions_widget.dart';
 import 'package:karty/features/home_profile/presentation/widgets/profile_card_list_widget.dart';
+import 'package:karty/features/home_profile/presentation/widgets/profile_personal_data_widget.dart';
 import 'package:karty/features/routes/route_sevices.dart';
 import 'package:karty/features/routes/routes.gr.dart';
 import 'package:karty/features/share_cards/domain/entities/contact_profile_entity.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
 import 'package:karty/features/shared/widgets/background_pattern.dart';
 import 'package:karty/features/shared/widgets/custom_elevated_button_widget.dart';
+import 'package:karty/features/shared/widgets/no_data_widget.dart';
 
 @RoutePage()
 class HomeProfileScreen extends StatefulWidget {
@@ -37,10 +40,13 @@ class _ProfileScreenState extends State<HomeProfileScreen> {
   @override
   void initState() {
     _carouselSliderController = CarouselSliderController();
-    _homeProfileCubit.getProfile(
-        homeProfileRequestModel: HomeProfileRequestModel(
-            email: "F.Taha@diyarme.com",
-            lang: LanguageHelper.isAr(context) ? "a" : "e"));
+
+    WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
+      _homeProfileCubit.getProfile(
+          homeProfileRequestModel: HomeProfileRequestModel(
+              email: "F.Taha@diyarme.com",
+              lang: LanguageHelper.isAr(context) ? "a" : "e"));
+    });
 
     super.initState();
   }
@@ -58,9 +64,15 @@ class _ProfileScreenState extends State<HomeProfileScreen> {
                 if (state is HomeProfileLoadingState) {
                   ViewsToolbox.showLoading();
                 } else if (state is HomeProfileReadyState) {
-                  ViewsToolbox.dismissLoading();
+                  if (state.isLoading) {
+                    ViewsToolbox.showLoading();
+                  } else {
+                    ViewsToolbox.dismissLoading();
+                  }
                 } else if (state is HomeProfileErrorState) {
                   ViewsToolbox.dismissLoading();
+                  ViewsToolbox.showErrorAwesomeSnackBar(
+                      context, state.message!);
                 }
               },
               builder: (BuildContext context, HomeProfileState state) {
@@ -78,8 +90,17 @@ class _ProfileScreenState extends State<HomeProfileScreen> {
                               child: Row(
                                 children: <Widget>[
                                   CircleActionsWidget(
-                                    icon: FontAwesomeIcons.refresh,
-                                    onPressed: () {},
+                                    icon: FontAwesomeIcons.arrowsRotate,
+                                    onPressed: () {
+                                      _homeProfileCubit.refreshProfile(
+                                          homeProfileRequestModel:
+                                              HomeProfileRequestModel(
+                                                  email: "F.Taha@diyarme.com",
+                                                  lang: LanguageHelper.isAr(
+                                                          context)
+                                                      ? "a"
+                                                      : "e"));
+                                    },
                                   ),
                                   15.widthBox,
                                   CircleActionsWidget(
@@ -104,35 +125,27 @@ class _ProfileScreenState extends State<HomeProfileScreen> {
                           ],
                         ),
                       ),
-                      // ProfilePersonalDataWidget(
-                      //   name: state.homeProfileEntity.data!.name,
-                      //   companyName:
-                      //       state.homeProfileEntity.data!.company.name ??
-                      //           "Diyaar United Company",
-                      //   isStatic: true,
-                      // ),
+                      ProfilePersonalDataWidget(
+                        name: state.homeProfileEntity.name ?? "",
+                        companyName: state.homeProfileEntity.company?.name ??
+                            "Diyaar United Company",
+                        isStatic: true,
+                      ),
                       35.heightBox,
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 15.w),
-                        child: ProfileCardsListWidget(
-                          carouselSliderController: _carouselSliderController,
-                          profiles: <ContactProfileEntity>[
-                            ContactProfileEntity(
-                              email: "F.Taha@diyarme.com",
-                              companyName: "Diyar United Company",
-                              location: "Kuwait",
-                              position: "Director",
-                              phoneNumber: "123456",
-                            ),
-                            ContactProfileEntity(
-                              email: "F.Taha@diyarme.com",
-                              companyName: "Diyar United Company",
-                              location: "Kuwait",
-                              position: "Unit Manager",
-                              phoneNumber: "123456",
-                            ),
-                          ],
-                        ),
+                        child: (state.homeProfileEntity.profiles ??
+                                    <HomeProfileItemResponseModel>[])
+                                .isEmpty
+                            ? NoDataWidget()
+                            : ProfileCardsListWidget(
+                                carouselSliderController:
+                                    _carouselSliderController,
+                                profiles: state.homeProfileEntity.profiles!
+                                    .map((ContactProfileEntity profile) =>
+                                        profile)
+                                    .toList(),
+                              ),
                       ),
                       100.heightBox,
                       Row(

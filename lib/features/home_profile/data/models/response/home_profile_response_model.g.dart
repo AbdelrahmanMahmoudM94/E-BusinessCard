@@ -10,13 +10,19 @@ HomeProfileModel _$HomeProfileModelFromJson(Map<String, dynamic> json) =>
     HomeProfileModel(
       email: json['email'] as String?,
       lang: json['lang'] as String?,
-      name: json['name'] as String,
+      name: json['name'] as String?,
       photo: json['photo'] as String?,
-      company: CompanyResponseModel.fromJson(
-          json['company'] as Map<String, dynamic>),
-      socialMediaList: (json['socialMediaList'] as List<dynamic>)
-          .map((e) =>
-              EditSocialMediaResponseModel.fromJson(e as Map<String, dynamic>))
+      company: json['company'] == null
+          ? null
+          : CompanyResponseModel.fromJson(
+              json['company'] as Map<String, dynamic>),
+      profiles: (json['profiles'] as List<dynamic>?)
+          ?.map((e) =>
+              HomeProfileItemResponseModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      socialMedia: (json['socialMedia'] as List<dynamic>?)
+          ?.map((e) =>
+              SocialMediaResponseModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -26,8 +32,9 @@ Map<String, dynamic> _$HomeProfileModelToJson(HomeProfileModel instance) =>
       'name': instance.name,
       'email': instance.email,
       'photo': instance.photo,
-      'socialMediaList': instance.socialMediaList,
+      'socialMedia': instance.socialMedia,
       'company': instance.company,
+      'profiles': instance.profiles,
     };
 
 HomeProfileResponseModel _$HomeProfileResponseModelFromJson(
