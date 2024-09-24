@@ -103,40 +103,39 @@ class _EditProfileScreenState extends State<MyDetailsWidget> {
                   ),
                 ),
                 30.heightBox,
-                BlocConsumer<EditProfileCubit, EditProfileState>(
+                BlocListener<EditProfileCubit, EditProfileState>(
                     listener: (BuildContext context, EditProfileState state) {
-                  if (state is EditProfileLoadingState) {
-                    ViewsToolbox.showLoading();
-                  } else if (state is EditProfileSocialMediaReadyState) {
-                    _hrRequestController.clear();
-                    ViewsToolbox.dismissLoading();
-                    ViewsToolbox.showAwesomeSnackBar(
-                        context, context.tr("requestSentSuccessfully"));
-                  } else if (state is EditProfileErrorState) {
-                    ViewsToolbox.dismissLoading();
-                    ViewsToolbox.showErrorAwesomeSnackBar(
-                        context, context.tr(state.message.toString()));
-                  }
-                }, builder: (BuildContext context, EditProfileState state) {
-                  return CustomElevatedButton(
-                    onPressed: () {
-                      _editProfileCubit.editProfile(
-                          editProfileRequestModel: EditProfileRequestModel(
-                              comments: _hrRequestController.text,
-                              email: "F.Taha@diyarme.com"));
+                      if (state is EditProfileLoadingState) {
+                        ViewsToolbox.showLoading();
+                      } else if (state is EditProfileSocialMediaReadyState) {
+                        _hrRequestController.clear();
+                        ViewsToolbox.dismissLoading();
+                        ViewsToolbox.showAwesomeSnackBar(
+                            context, context.tr("requestSentSuccessfully"));
+                      } else if (state is EditProfileErrorState) {
+                        ViewsToolbox.dismissLoading();
+                        ViewsToolbox.showErrorAwesomeSnackBar(
+                            context, context.tr(state.message.toString()));
+                      }
                     },
-                    height: 64.h,
-                    width: 390.w,
-                    radius: 20.r,
-                    text: context.tr("submit"),
-                    textStyle: AppTextStyle.bold_18,
-                    borderColor: Colors.transparent,
-                    gradient: LinearGradient(colors: <Color>[
-                      Palette.blue_0DBDFF,
-                      Palette.blue_05A3DF
-                    ]),
-                  );
-                }),
+                    child: CustomElevatedButton(
+                      onPressed: () {
+                        _editProfileCubit.editProfile(
+                            editProfileRequestModel: EditProfileRequestModel(
+                                comments: _hrRequestController.text,
+                                email: "F.Taha@diyarme.com"));
+                      },
+                      height: 64.h,
+                      width: 390.w,
+                      radius: 20.r,
+                      text: context.tr("submit"),
+                      textStyle: AppTextStyle.bold_18,
+                      borderColor: Colors.transparent,
+                      gradient: LinearGradient(colors: <Color>[
+                        Palette.blue_0DBDFF,
+                        Palette.blue_05A3DF
+                      ]),
+                    ))
               ],
             )),
       ],

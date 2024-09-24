@@ -88,7 +88,7 @@ class _SocialMediaWidgetState extends State<SocialMediaWidget> {
                     ).toList(),
                   ),
                 ),
-                120.heightBox,
+                80.heightBox,
                 BlocProvider<EditProfileCubit>.value(
                     value: _editProfileCubit,
                     child: BlocConsumer<EditProfileCubit, EditProfileState>(
@@ -209,14 +209,17 @@ class SocialMediaField extends StatelessWidget {
         readOnly: readOnly,
         prefixIcon: Container(
             width: 10.w,
-            child: Center(
-              child: base64Icon.isNotEmpty
-                  ? ViewsToolbox.imageFromBase64String(
-                      base64Icon.replaceAll("data:image/png;base64,", ""))
-                  : SvgPicture.asset(
-                      "assets/svg/$icon",
-                      width: iconWidth,
-                    ),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: base64Icon.isNotEmpty
+                    ? ViewsToolbox.imageFromBase64String(
+                        base64Icon.replaceAll("data:image/png;base64,", ""))
+                    : SvgPicture.asset(
+                        "assets/svg/$icon",
+                        width: iconWidth,
+                      ),
+              ),
             )),
       ),
     );
