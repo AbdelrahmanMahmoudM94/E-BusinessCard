@@ -11,6 +11,7 @@ import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/common/utility/theme.dart';
 import 'package:karty/features/di/dependency_init.dart';
 import 'package:karty/features/routes/routes.dart';
+import 'package:karty/features/shared/widgets/app_text.dart';
 
 class ViewsToolbox {
   static void showLoading({bool allowClicking = false}) {
@@ -316,153 +317,153 @@ class ViewsToolbox {
   //   );
   // }
 
-  // static void showCustomDialog({
-  //   required BuildContext dialogContext,
-  //   required List<Widget> widgets,
-  //   required Function(BuildContext) getDialogContext,
-  //   Function()? refresh,
-  //   double? radius,
-  //   String? logoImagePath,
-  //   String? header,
-  //   String? backgroundImagePath,
-  //   ImageExtension? imageExtension,
-  //   ImageExtension? logoExtension,
-  //   Positioned? backgroundPositioned,
-  //   bool showCloseIcon = false,
-  //   Offset? backgroundImageOffset,
-  // }) {
-  //   if (refresh != null) {
-  //     refresh();
-  //   }
-  //   final AlertDialog alert = AlertDialog(
-  //     shape: RoundedRectangleBorder(
-  //       borderRadius: BorderRadius.circular(radius ?? 15.r),
-  //     ),
-  //     content: Directionality(
-  //       textDirection: LanguageHelper.isAr(dialogContext)
-  //           ? TextDirection.rtl
-  //           : TextDirection.ltr,
-  //       child: StatefulBuilder(
-  //         builder: (BuildContext builderContext, StateSetter myState) {
-  //           return Stack(
-  //             clipBehavior: Clip.none,
-  //             children: <Widget>[
-  //               backgroundImagePath != null
-  //                   ? Positioned(
-  //                       top: backgroundPositioned?.top ?? -19.h,
-  //                       left: 0,
-  //                       right: 0,
-  //                       child: imageExtension == ImageExtension.svg
-  //                           ? SvgPicture.asset(
-  //                               backgroundImagePath,
-  //                             )
-  //                           : Image.asset(
-  //                               backgroundImagePath,
-  //                             ),
-  //                     )
-  //                   : const SizedBox(
-  //                       width: 0,
-  //                       height: 0,
-  //                     ),
-  //               showCloseIcon
-  //                   ? Positioned(
-  //                       left: LanguageHelper.isAr(dialogContext) ? -20.w : null,
-  //                       right:
-  //                           LanguageHelper.isEN(dialogContext) ? -20.w : null,
-  //                       top: -15.h,
-  //                       child: IconButton(
-  //                         onPressed: () => ViewsToolbox.dismissDialog(
-  //                           dialogContext: builderContext,
-  //                         ),
-  //                         icon: Icon(
-  //                           Icons.close,
-  //                           textDirection: LanguageHelper.isAr(dialogContext)
-  //                               ? TextDirection.ltr
-  //                               : TextDirection.rtl,
-  //                           size: 27.w,
-  //                           color: AppTheme.isDarkMode()
-  //                               ? Palette.white
-  //                               : Palette.black,
-  //                         ),
-  //                       ),
-  //                     )
-  //                   : const SizedBox(
-  //                       width: 0,
-  //                       height: 0,
-  //                     ),
-  //               header != null
-  //                   ? Positioned(
-  //                       top: 12.h,
-  //                       left: 0,
-  //                       right: 0,
-  //                       child: AppText(
-  //                         textAlign: TextAlign.center,
-  //                         text: header,
-  //                         fontSize: 28,
-  //                         fontWeight: AppFontWeight.bold,
-  //                       ),
-  //                     )
-  //                   : const SizedBox(
-  //                       width: 0,
-  //                       height: 0,
-  //                     ),
-  //               Padding(
-  //                 padding: EdgeInsets.only(
-  //                   top: header != null ? 40.h : 20.h,
-  //                 ),
-  //                 child: SizedBox(
-  //                   width: 600.w,
-  //                   child: Column(
-  //                     mainAxisSize: MainAxisSize.min,
-  //                     children: widgets,
-  //                   ),
-  //                 ),
-  //               ),
-  //               logoImagePath != null
-  //                   ? Transform.translate(
-  //                       offset: LanguageHelper.isAr(dialogContext)
-  //                           ? Offset(-98.w, -96.h)
-  //                           : Offset(102.w, -97.h),
-  //                       child: Container(
-  //                         width: 90.w,
-  //                         height: 90.w,
-  //                         decoration: const BoxDecoration(
-  //                           shape: BoxShape.circle,
-  //                           color: Palette.white,
-  //                         ),
-  //                         child: Center(
-  //                           child: logoImagePath != null
-  //                               ? logoExtension == ImageExtension.svg
-  //                                   ? SvgPicture.asset(logoImagePath)
-  //                                   : Image.asset(logoImagePath)
-  //                               : const SizedBox(
-  //                                   width: 0,
-  //                                   height: 0,
-  //                                 ),
-  //                         ),
-  //                       ),
-  //                     )
-  //                   : const SizedBox(
-  //                       width: 0,
-  //                       height: 0,
-  //                     ),
-  //             ],
-  //           );
-  //         },
-  //       ),
-  //     ),
-  //   );
+  static void showCustomDialog({
+    required BuildContext dialogContext,
+    required List<Widget> widgets,
+    required Function(BuildContext) getDialogContext,
+    Function()? refresh,
+    double? radius,
+    String? logoImagePath,
+    String? header,
+    String? backgroundImagePath,
+    ImageExtension? imageExtension,
+    ImageExtension? logoExtension,
+    Positioned? backgroundPositioned,
+    bool showCloseIcon = false,
+    Offset? backgroundImageOffset,
+  }) {
+    if (refresh != null) {
+      refresh();
+    }
+    final AlertDialog alert = AlertDialog(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(radius ?? 15.r),
+      ),
+      content: Directionality(
+        textDirection: LanguageHelper.isAr(dialogContext)
+            ? TextDirection.rtl
+            : TextDirection.ltr,
+        child: StatefulBuilder(
+          builder: (BuildContext builderContext, StateSetter myState) {
+            return Stack(
+              clipBehavior: Clip.none,
+              children: <Widget>[
+                backgroundImagePath != null
+                    ? Positioned(
+                        top: backgroundPositioned?.top ?? -19.h,
+                        left: 0,
+                        right: 0,
+                        child: imageExtension == ImageExtension.svg
+                            ? SvgPicture.asset(
+                                backgroundImagePath,
+                              )
+                            : Image.asset(
+                                backgroundImagePath,
+                              ),
+                      )
+                    : const SizedBox(
+                        width: 0,
+                        height: 0,
+                      ),
+                showCloseIcon
+                    ? Positioned(
+                        left: LanguageHelper.isAr(dialogContext) ? -20.w : null,
+                        right:
+                            LanguageHelper.isEN(dialogContext) ? -20.w : null,
+                        top: -15.h,
+                        child: IconButton(
+                          onPressed: () => ViewsToolbox.dismissDialog(
+                            dialogContext: builderContext,
+                          ),
+                          icon: Icon(
+                            Icons.close,
+                            textDirection: LanguageHelper.isAr(dialogContext)
+                                ? TextDirection.ltr
+                                : TextDirection.rtl,
+                            size: 27.w,
+                            color: AppTheme.isDarkMode(dialogContext)
+                                ? Palette.white
+                                : Palette.black,
+                          ),
+                        ),
+                      )
+                    : const SizedBox(
+                        width: 0,
+                        height: 0,
+                      ),
+                header != null
+                    ? Positioned(
+                        top: 12.h,
+                        left: 0,
+                        right: 0,
+                        child: AppText(
+                          textAlign: TextAlign.center,
+                          text: header,
+                          fontSize: 28,
+                          fontWeight: AppFontWeight.bold,
+                        ),
+                      )
+                    : const SizedBox(
+                        width: 0,
+                        height: 0,
+                      ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    top: header != null ? 40.h : 20.h,
+                  ),
+                  child: SizedBox(
+                    width: 600.w,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: widgets,
+                    ),
+                  ),
+                ),
+                logoImagePath != null
+                    ? Transform.translate(
+                        offset: LanguageHelper.isAr(dialogContext)
+                            ? Offset(-98.w, -96.h)
+                            : Offset(102.w, -97.h),
+                        child: Container(
+                          width: 90.w,
+                          height: 90.w,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Palette.white,
+                          ),
+                          child: Center(
+                            child: logoImagePath != null
+                                ? logoExtension == ImageExtension.svg
+                                    ? SvgPicture.asset(logoImagePath)
+                                    : Image.asset(logoImagePath)
+                                : const SizedBox(
+                                    width: 0,
+                                    height: 0,
+                                  ),
+                          ),
+                        ),
+                      )
+                    : const SizedBox(
+                        width: 0,
+                        height: 0,
+                      ),
+              ],
+            );
+          },
+        ),
+      ),
+    );
 
-  //   // show the dialog
-  //   showDialog(
-  //     context: dialogContext,
-  //     barrierDismissible: false,
-  //     builder: (BuildContext context) {
-  //       getDialogContext(context);
-  //       return alert;
-  //     },
-  //   );
-  // }
+    // show the dialog
+    showDialog(
+      context: dialogContext,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        getDialogContext(context);
+        return alert;
+      },
+    );
+  }
 
   static void dismissDialog({
     required BuildContext dialogContext,
@@ -654,4 +655,9 @@ class ViewsToolbox {
       }
     }
   }
+}
+
+enum ImageExtension{
+  svg,
+  png
 }
