@@ -16,9 +16,9 @@ class AppRouter extends RootStackRouter {
             path: "/bottomSheet",
             children: <AutoRoute>[
               AutoRoute(
-                page: HomeProfileRoute.page,
-                path: "profile",
-              ),
+                  page: HomeProfileRoute.page,
+                  path: "profile",
+                  maintainState: false),
               AutoRoute(
                 page: ScanRoute.page,
                 path: "scan",

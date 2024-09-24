@@ -17,8 +17,10 @@ class TextAreaFieldWidget extends StatelessWidget {
     this.maxLines,
     this.controller,
     this.onSubmitted,
+    this.maxLength,
     this.onSaved,
   });
+  final int? maxLength;
   final String keyName;
   final String? labelAboveField;
   final String? hintText;
@@ -47,6 +49,7 @@ class TextAreaFieldWidget extends StatelessWidget {
           child: FormBuilderTextField(
             textInputAction: TextInputAction.done,
             maxLines: maxLines ?? 9,
+            maxLength: maxLength,
             controller: controller,
             onSaved: onSaved,
             name: keyName,

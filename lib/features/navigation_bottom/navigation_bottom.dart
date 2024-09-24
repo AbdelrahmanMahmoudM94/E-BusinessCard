@@ -68,7 +68,7 @@ class _NavigationMainScreenState extends State<NavigationMainScreen> {
               activeIcon: Padding(
                 padding: EdgeInsets.only(bottom: 10.h),
                 child: SvgPicture.asset(
-                  "assets/svg/scan-icon-bottom.svg",
+                  "assets/svg/profile-icon-bottom.svg",
                   colorFilter:
                       ColorFilter.mode(Palette.blue_0DBDFF, BlendMode.srcIn),
                 ),

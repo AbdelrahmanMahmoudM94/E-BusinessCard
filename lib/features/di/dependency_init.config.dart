@@ -15,16 +15,26 @@ import 'package:karty/core/network/network_helper.dart' as _i474;
 import 'package:karty/features/di/register_module.dart' as _i828;
 import 'package:karty/features/edit_profile/data/data_sources/edit_profile_data_sources.dart'
     as _i578;
+import 'package:karty/features/edit_profile/data/data_sources/get_profile_data_sources.dart'
+    as _i933;
 import 'package:karty/features/edit_profile/data/repositories/edit_profile_repository_imp.dart'
     as _i483;
+import 'package:karty/features/edit_profile/data/repositories/get_social_media_repository_imp.dart'
+    as _i988;
 import 'package:karty/features/edit_profile/domain/repositories/edit_profile_repository.dart'
     as _i1000;
+import 'package:karty/features/edit_profile/domain/repositories/get_profile_repository.dart'
+    as _i400;
 import 'package:karty/features/edit_profile/domain/use_cases/edit_profile_use_case.dart'
     as _i659;
 import 'package:karty/features/edit_profile/domain/use_cases/edit_social_media_use_case.dart'
     as _i868;
+import 'package:karty/features/edit_profile/domain/use_cases/get_profile_use_case.dart'
+    as _i425;
 import 'package:karty/features/edit_profile/presentation/cubit/edit_profile_cubit.dart'
     as _i620;
+import 'package:karty/features/edit_profile/presentation/cubit/get_profile_cubit.dart'
+    as _i1073;
 import 'package:karty/features/home_profile/data/data_sources/profile_data_sources.dart'
     as _i588;
 import 'package:karty/features/home_profile/data/repositories/home_profile_repository_imp.dart'
@@ -33,6 +43,8 @@ import 'package:karty/features/home_profile/domain/repositories/home_profile_rep
     as _i949;
 import 'package:karty/features/home_profile/domain/use_cases/home_profile_use_case.dart'
     as _i103;
+import 'package:karty/features/home_profile/presentation/cubit/home_profile_cubit.dart'
+    as _i200;
 import 'package:karty/features/login/data/data_sources/login_data_sources.dart'
     as _i556;
 import 'package:karty/features/login/data/repositories/login_repository_imp.dart'
@@ -95,12 +107,20 @@ Future<_i174.GetIt> $initGetIt(
     () => registerModule.baseUrl,
     instanceName: 'BaseUrl',
   );
-
+  gh.factory<_i933.GetProfileRepositoryImpLocalDataSource>(
+      () => _i933.GetProfileDataSourceImpl());
+  gh.factory<_i400.GetProfileRepository>(() => _i988.GetProfileRepositoryImp(
+      getProfileaRepositoryImpLocalDataSource:
+          gh<_i933.GetProfileRepositoryImpLocalDataSource>()));
+  gh.factory<_i425.GetProfileUseCase>(() => _i425.GetProfileUseCase(
+      getProfileRepository: gh<_i400.GetProfileRepository>()));
   gh.lazySingleton<_i361.Dio>(
       () => registerModule.dio(gh<String>(instanceName: 'BaseUrl')));
   gh.factory<_i474.NetworkHelper>(() => _i474.NetworkHelper(gh<_i361.Dio>()));
   gh.factory<_i588.HomeProfileRemoteDataSource>(
       () => _i588.ProfileDataSourceImpl(gh<_i474.NetworkHelper>()));
+  gh.factory<_i1073.GetProfileCubit>(() =>
+      _i1073.GetProfileCubit(getProfileUseCase: gh<_i425.GetProfileUseCase>()));
   gh.factory<_i719.MoreRemoteDataSource>(
       () => _i719.MoreRemoteDataSourceImpl(gh<_i474.NetworkHelper>()));
   gh.factory<_i578.EditProfileRemoteDataSource>(
@@ -120,7 +140,9 @@ Future<_i174.GetIt> $initGetIt(
   gh.factory<_i161.LoginRepository>(() => _i378.LoginRepositoryImp(
       loginRemoteDataSource: gh<_i556.LoginRemoteDataSource>()));
   gh.factory<_i103.HomeProfileUseCase>(() => _i103.HomeProfileUseCase(
-      repoInstanceRepository: gh<_i949.HomeProfileRepository>()));
+      homeProfileRepository: gh<_i949.HomeProfileRepository>()));
+  gh.factory<_i200.HomeProfileCubit>(() => _i200.HomeProfileCubit(
+      homeProfileUseCase: gh<_i103.HomeProfileUseCase>()));
   gh.factory<_i1000.EditProfileRepository>(() => _i483.EditProfileRepositoryImp(
       editProfileRemoteDataSource: gh<_i578.EditProfileRemoteDataSource>()));
   gh.factory<_i659.EditProfileUseCase>(() => _i659.EditProfileUseCase(
