@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:karty/features/common/constants.dart';
 import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
 
@@ -19,7 +17,10 @@ class TextAreaFieldWidget extends StatelessWidget {
     this.maxLines,
     this.controller,
     this.onSubmitted,
+    this.maxLength,
+    this.onSaved,
   });
+  final int? maxLength;
   final String keyName;
   final String? labelAboveField;
   final String? hintText;
@@ -30,6 +31,7 @@ class TextAreaFieldWidget extends StatelessWidget {
   final EdgeInsetsGeometry? contentPadding;
   final int? maxLines;
   final TextEditingController? controller;
+  final void Function(String?)? onSaved;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -47,7 +49,9 @@ class TextAreaFieldWidget extends StatelessWidget {
           child: FormBuilderTextField(
             textInputAction: TextInputAction.done,
             maxLines: maxLines ?? 9,
+            maxLength: maxLength,
             controller: controller,
+            onSaved: onSaved,
             name: keyName,
             onSubmitted: onSubmitted,
             validator: validator,

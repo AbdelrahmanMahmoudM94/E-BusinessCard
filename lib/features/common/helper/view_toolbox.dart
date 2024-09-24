@@ -1,25 +1,16 @@
 import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
+
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
-import 'package:collection/collection.dart';
-import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart' as local;
-import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:karty/features/common/helper/language_helper.dart';
 import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/common/utility/theme.dart';
 import 'package:karty/features/di/dependency_init.dart';
 import 'package:karty/features/routes/routes.dart';
-
-import 'package:path/path.dart' as path;
 
 class ViewsToolbox {
   static void showLoading({bool allowClicking = false}) {
@@ -477,6 +468,21 @@ class ViewsToolbox {
     required BuildContext dialogContext,
   }) {
     Navigator.pop(dialogContext);
+  }
+
+//icon from base64 string
+  static Widget iconFromBase64String(
+    String base64String, {
+    double? width,
+    double? height,
+    Color? color,
+  }) {
+    return SvgPicture.string(
+      base64String,
+      width: width,
+      height: height,
+      color: color,
+    );
   }
 
   static Image imageFromBase64String(

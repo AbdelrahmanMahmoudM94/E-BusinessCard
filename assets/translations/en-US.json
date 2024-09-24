@@ -36,5 +36,6 @@
   "qrCodeText": "QR Code",
   "businessCard": "Business Card",
   "findACardToScan": "Find a card to scan",
-  "notes": "Note"
+  "notes": "Note",
+  "requestSentSuccessfully": "Request sent successfully"
 }

@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:karty/core/network/exception/error_status.dart';
+import 'package:karty/features/common/helper/view_toolbox.dart';
 
- 
 class ExceptionHandle {
   static String globalError = "Some Thing Wrong Happened...";
 
   static NetError handleException(dynamic error) {
+    ViewsToolbox.dismissLoading();
+
     if (error is DioException) {
       if (error.type == DioExceptionType.unknown ||
           error.type == DioExceptionType.badResponse) {

@@ -1,8 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:injectable/injectable.dart';
-import 'package:karty/features/common/constants.dart';
-import 'package:karty/features/di/dependency_init.dart';
 import 'package:karty/features/routes/routes.gr.dart';
 
 @AutoRouterConfig()
@@ -20,9 +16,9 @@ class AppRouter extends RootStackRouter {
             path: "/bottomSheet",
             children: <AutoRoute>[
               AutoRoute(
-                page: ProfileRoute.page,
-                path: "profile",
-              ),
+                  page: HomeProfileRoute.page,
+                  path: "profile",
+                  maintainState: false),
               AutoRoute(
                 page: ScanRoute.page,
                 path: "scan",

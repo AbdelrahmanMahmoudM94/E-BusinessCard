@@ -1,23 +1,21 @@
 import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_contacts/contact.dart';
-import 'package:flutter_contacts/flutter_contacts.dart';
-import 'package:karty/features/common/extensions/padding_extension.dart';
-import 'package:karty/features/profile/presentation/widgets/profile_info_card_widget.dart';
-import 'package:karty/features/scan/domain/entities/qr_scaned_data.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:karty/features/common/extensions/padding_extension.dart';
 import 'package:karty/features/common/extensions/size_extensions.dart';
 import 'package:karty/features/common/helper/language_helper.dart';
 import 'package:karty/features/common/helper/view_toolbox.dart';
-
 import 'package:karty/features/common/utility/palette.dart';
-import 'package:karty/features/profile/presentation/widgets/profile_personal_data_widget.dart';
+import 'package:karty/features/home_profile/presentation/widgets/profile_info_card_widget.dart';
+import 'package:karty/features/home_profile/presentation/widgets/profile_personal_data_widget.dart';
 import 'package:karty/features/routes/route_sevices.dart';
+import 'package:karty/features/scan/domain/entities/qr_scaned_data.dart';
 import 'package:karty/features/share_cards/domain/entities/contact_profile_entity.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
 import 'package:karty/features/shared/widgets/background_pattern.dart';
@@ -124,6 +122,7 @@ class _ScanResultScreenState extends State<ScanResultScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: TextFieldWidget(
+                readOnly: false,
                 keyName: "location",
                 controller: _locationTextController,
                 prefixIcon: Container(
@@ -166,7 +165,7 @@ class _ScanResultScreenState extends State<ScanResultScreen> {
                         Phone(widget.qrScannedDataEntity!.tel)
                       ];
                     FlutterContacts.config.includeNotesOnIos13AndAbove = true;
-                     await FlutterContacts.openExternalInsert(newContact)
+                    await FlutterContacts.openExternalInsert(newContact)
                         .then((Contact? vg) {
                       log(vg.toString());
                     });

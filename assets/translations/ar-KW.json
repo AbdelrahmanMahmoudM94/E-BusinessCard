@@ -31,13 +31,11 @@
   "forgetPassword": "هل نسيت كلمة السر؟",
   "loadingTextDialog": "تحميل...",
   "noDataFound": "مافي بيانات",
-  "scanCodeToGetData":"امسح الرمز للحصول على البيانات",
-  "cancel":"الغاء",
-   "qrCodeText":"رمز QR",
-  "businessCard":"بطاقة العمل",
-"findACardToScan":"العثور على بطاقة عمل",
-"notes":"ملاحظات"
-
-
-
+  "scanCodeToGetData": "امسح الرمز للحصول على البيانات",
+  "cancel": "الغاء",
+  "qrCodeText": "رمز QR",
+  "businessCard": "بطاقة العمل",
+  "findACardToScan": "العثور على بطاقة عمل",
+  "notes": "ملاحظات",
+  "requestSentSuccessfully": "تم ارسال الطلب بنجاح"
 }
