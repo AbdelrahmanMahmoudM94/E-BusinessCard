@@ -12,12 +12,14 @@ EditSocialMediaModel _$EditSocialMediaModelFromJson(
       socialMediaName: json['socialMediaName'] as String?,
       socialMediaProfile: json['socialMediaProfile'] as String?,
       url: json['url'] as String?,
+      icon: json['icon'] as String?,
     );
 
 Map<String, dynamic> _$EditSocialMediaModelToJson(
         EditSocialMediaModel instance) =>
     <String, dynamic>{
       'socialMediaName': instance.socialMediaName,
+      'icon': instance.icon,
       'socialMediaProfile': instance.socialMediaProfile,
       'url': instance.url,
     };

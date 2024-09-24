@@ -12,12 +12,12 @@ part 'edit_profile_state.dart';
 
 @injectable
 class EditProfileCubit extends Cubit<EditProfileState> {
-  EditProfileCubit(
-      {required this.editProfileUseCase, required this.editSocialMediaUseCase})
-      : super(EditProfileInitial());
+  EditProfileCubit({
+    required this.editProfileUseCase,
+    required this.editSocialMediaUseCase,
+  }) : super(EditProfileInitial());
   final EditProfileUseCase editProfileUseCase;
   final EditSocialMediaUseCase editSocialMediaUseCase;
-
   Future<void> editProfile(
       {required EditProfileRequestModel editProfileRequestModel}) async {
     emit(EditProfileLoadingState());
@@ -34,7 +34,7 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       ));
     }, (BaseEntity<bool> response) {
       if (response.data == true) {
-        emit(EditProfileSuccessState());
+        emit(EditProfileSocialMediaReadyState());
       } else {
         emit(EditProfileErrorState(
           message: response.message,
@@ -55,13 +55,8 @@ class EditProfileCubit extends Cubit<EditProfileState> {
         message: FailureToMassage().mapFailureToMessage(failure),
       ));
     }, (BaseEntity<bool> response) {
-      if (response.data == true) {
-        emit(EditProfileSuccessState());
-      } else {
-        emit(EditProfileErrorState(
-          message: response.message,
-        ));
-      }
+      emit(EditProfileSocialMediaReadyState());
+      //TODO: reload profile again from online server to get the updated data
     });
   }
 }

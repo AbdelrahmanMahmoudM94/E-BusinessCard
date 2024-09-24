@@ -8,7 +8,6 @@ import 'package:karty/features/edit_profile/data/models/request/edit_profile_req
 import 'package:karty/features/edit_profile/data/models/request/edit_social_media_request_model.dart';
 import 'package:karty/features/edit_profile/data/models/response/edit_profile_response_model.dart';
 import 'package:karty/features/edit_profile/data/models/response/edit_social_media_response_model.dart';
-import 'package:karty/features/shared/data/local_data.dart';
 
 abstract class EditProfileRemoteDataSource {
   Future<CustomResponseType<EditProfileResponseModel>> editProfile(
@@ -26,15 +25,8 @@ class EditProfileDataSourceImpl implements EditProfileRemoteDataSource {
   @override
   Future<CustomResponseType<EditProfileResponseModel>> editProfile(
       {required EditProfileRequestModel editProfileRequestModel}) async {
-    final String? mobKey = LocalData.getMobKey();
-
-    ({dynamic response, bool success}) result =
-        await networkHelper.post(headers: <String, String>{
-      "mobKey": "$mobKey",
-      "Accept": "application/json",
-      "Content-Type": "application/json",
-      "Connection": "keep-alive"
-    }, path: ApiConstants.editProfile, data: editProfileRequestModel.toJson());
+    ({dynamic response, bool success}) result = await networkHelper.post(
+        path: ApiConstants.editProfile, data: editProfileRequestModel.toJson());
 
     if (result.success) {
       return right(EditProfileResponseModel.fromJson(result.response));
@@ -46,22 +38,13 @@ class EditProfileDataSourceImpl implements EditProfileRemoteDataSource {
   Future<CustomResponseType<EditSocialMediaResponseModel>> editSocialMedia(
       {required List<EditSocialMediaRequestModel>
           editSoicalMediaRequestModel}) async {
-    final String? mobKey = LocalData.getMobKey();
-
-    ({dynamic response, bool success}) result = await networkHelper.post(
-        headers: <String, String>{
-          "mobKey": "$mobKey",
-          "Accept": "application/json",
-          "Content-Type": "application/json",
-          "Connection": "keep-alive"
-        },
-        path: ApiConstants.editSocialMedia,
-        data: <String, Object>{
-          "email": "F.Taha@diyarme.com",
-          "socialMediaList": editSoicalMediaRequestModel
-              .map((EditSocialMediaRequestModel e) => e.toJson())
-              .toList()
-        });
+    ({dynamic response, bool success}) result = await networkHelper
+        .post(path: ApiConstants.editSocialMedia, data: <String, Object>{
+      "email": "F.Taha@diyarme.com",
+      "socialMediaList": editSoicalMediaRequestModel
+          .map((EditSocialMediaRequestModel e) => e.toJson())
+          .toList()
+    });
 
     if (result.success) {
       return right(EditSocialMediaResponseModel.fromJson(result.response));

@@ -6,11 +6,8 @@ part 'edit_social_media_response_model.g.dart';
 
 @JsonSerializable()
 class EditSocialMediaModel extends EditSocialMediaEntity {
-  EditSocialMediaModel({
-    super.socialMediaName,
-    super.socialMediaProfile,
-    super.url,
-  });
+  EditSocialMediaModel(
+      {super.socialMediaName, super.socialMediaProfile, super.url, super.icon});
   factory EditSocialMediaModel.fromJson(Map<String, dynamic> json) =>
       _$EditSocialMediaModelFromJson(json);
 
