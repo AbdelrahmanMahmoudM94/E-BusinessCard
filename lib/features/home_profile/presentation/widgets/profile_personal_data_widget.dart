@@ -2,12 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
 import 'package:karty/features/common/extensions/size_extensions.dart';
 import 'package:karty/features/common/helper/language_helper.dart';
 import 'package:karty/features/common/helper/view_toolbox.dart';
 import 'package:karty/features/common/utility/palette.dart';
-import 'package:karty/features/login/presentation/screens/login_screen.dart';
 import 'package:karty/features/share_cards/domain/entities/social_media_entity.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,9 +39,9 @@ class ProfilePersonalDataWidget extends StatelessWidget {
                     "assets/png/user-default.png",
                     width: 80.w,
                   )
-                : Image.asset(
-                    "assets/png/user-default.png",
+                : ViewsToolbox.imageFromBase64String(
                     width: 80.w,
+                    photo!.split(",").last,
                   ),
           ),
         ),

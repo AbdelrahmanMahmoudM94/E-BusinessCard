@@ -1,8 +1,12 @@
+import 'dart:convert';
+
 import 'package:karty/features/di/dependency_init.dart';
+import 'package:karty/features/home_profile/data/models/response/home_profile_response_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalData {
   static final SharedPreferences sharedPreferences = getIt<SharedPreferences>();
+
   static Future<void>? setApplicationTheme(bool isDarkMode) async {
     await sharedPreferences.setBool("isDarkMode", isDarkMode);
   }
@@ -41,5 +45,18 @@ class LocalData {
 
   static String? getAppAndroidVersion() {
     return sharedPreferences.getString("androidVersion");
+  }
+
+  static Future<void>? setHomeProfile(
+      HomeProfileResponseModel homeProfile) async {
+    await sharedPreferences.setString("homeProfile", jsonEncode(homeProfile));
+  }
+
+  static HomeProfileResponseModel? getHomeProfile() {
+    final String? homeProfile = sharedPreferences.getString("homeProfile");
+    if (homeProfile != null) {
+      return HomeProfileResponseModel.fromJson(jsonDecode(homeProfile));
+    }
+    return null;
   }
 }

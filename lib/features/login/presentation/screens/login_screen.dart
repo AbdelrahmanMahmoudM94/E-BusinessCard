@@ -3,12 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:karty/features/common/constants.dart';
 import 'package:karty/features/common/extensions/size_extensions.dart';
-import 'package:karty/features/common/helper/encrypt_data.dart';
 import 'package:karty/features/common/helper/language_helper.dart';
 import 'package:karty/features/common/helper/view_toolbox.dart';
-
 import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/common/utility/theme.dart';
 import 'package:karty/features/di/dependency_init.dart';
@@ -19,9 +16,6 @@ import 'package:karty/features/routes/routes.gr.dart';
 import 'package:karty/features/shared/data/local_data.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
 import 'package:karty/features/shared/widgets/custom_elevated_button_widget.dart';
-import 'package:karty/features/shared/widgets/forms/email_field_widget.dart';
-import 'package:karty/features/shared/widgets/forms/password_field_widget.dart';
-import 'package:karty/features/splash/presentation/screens/splash_screen.dart';
 
 @RoutePage()
 class LoginScreen extends StatefulWidget {
@@ -228,7 +222,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           _loginCubit.getAppConfig(email: "F.Taha@diyarme.com");
                           CustomMainRouter.navigate(
                               NavigationMainRoute(children: <PageRouteInfo>[
-                            ProfileRoute(),
+                            HomeProfileRoute(),
                           ]));
                         },
                         height: 64.h,

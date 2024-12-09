@@ -1,26 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:karty/features/common/constants.dart';
 import 'package:karty/features/common/extensions/size_extensions.dart';
 import 'package:karty/features/common/helper/language_helper.dart';
-
 import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/common/utility/theme.dart';
-import 'package:karty/features/di/dependency_init.dart';
-import 'package:karty/features/login/presentation/screens/login_screen.dart';
-import 'package:karty/features/profile/presentation/widgets/circle_actions_widget.dart';
-import 'package:karty/features/routes/route_sevices.dart';
-import 'package:karty/features/routes/routes.dart';
-import 'package:karty/features/routes/routes.gr.dart';
-import 'package:karty/features/share_cards/presentation/widgets/oval_actions_widget.dart';
-import 'package:karty/features/shared/cubit/language/theme_cubit.dart';
 import 'package:karty/features/shared/data/local_data.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
-import 'package:karty/features/shared/widgets/background_pattern.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class LanguageToggleWidget extends StatefulWidget {
@@ -60,10 +47,8 @@ class _LanguageToggleWidgetState extends State<LanguageToggleWidget> {
                 activeBgColor: <Color>[Palette.lightBlue],
                 activeFgColor: Colors.white,
                 inactiveBgColor: Colors.white,
-                inactiveFgColor: AppTheme.inDarkMode(
-            context,
-                    dark: Palette.black,
-                    light: Palette.black),
+                inactiveFgColor: AppTheme.inDarkMode(context,
+                    dark: Palette.black, light: Palette.black),
                 totalSwitches: 2,
                 textDirectionRTL: context.locale == Locale('ar', 'KW'),
                 labels: context.locale == Locale('ar', 'KW')

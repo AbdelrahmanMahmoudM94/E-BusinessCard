@@ -2,11 +2,9 @@
 import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'package:karty/features/common/extensions/size_extensions.dart';
-import 'package:karty/features/profile/presentation/widgets/profile_info_card_widget.dart';
+import 'package:karty/features/home_profile/presentation/widgets/profile_info_card_widget.dart';
 import 'package:karty/features/share_cards/domain/entities/contact_profile_entity.dart';
-import 'package:karty/features/splash/presentation/screens/splash_screen.dart';
 
 class ProfileCardsListWidget extends StatelessWidget {
   ProfileCardsListWidget({

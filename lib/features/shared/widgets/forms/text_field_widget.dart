@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:karty/features/common/utility/palette.dart';
 import 'package:karty/features/shared/widgets/app_text.dart';
 
@@ -19,6 +18,7 @@ class TextFieldWidget extends StatelessWidget {
     this.prefixIcon,
     this.initalValue,
     this.controller,
+    required this.readOnly,
   });
   final String keyName;
   final String? labelAboveField;
@@ -30,7 +30,8 @@ class TextFieldWidget extends StatelessWidget {
   final Widget? prefixIcon;
   final EdgeInsetsGeometry? contentPadding;
   final int? maxLines;
-    final TextEditingController? controller;
+  final TextEditingController? controller;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +48,7 @@ class TextFieldWidget extends StatelessWidget {
               ? EdgeInsets.only(top: 10.h)
               : EdgeInsets.zero,
           child: FormBuilderTextField(
+            readOnly: readOnly,
             maxLines: maxLines ?? 1,
             name: keyName,
             controller: controller,

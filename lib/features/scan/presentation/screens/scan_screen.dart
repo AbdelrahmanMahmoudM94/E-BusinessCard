@@ -42,7 +42,7 @@ class _ScanScreenState extends State<ScanScreen> {
             InkWell(
               onTap: () => CustomMainRouter.navigate(
                   NavigationMainRoute(children: <PageRouteInfo>[
-                ProfileRoute(),
+                HomeProfileRoute(),
               ])),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 30.w),
@@ -131,7 +131,7 @@ class _ScanScreenState extends State<ScanScreen> {
               onTap: () {
                 CustomMainRouter.navigate(
                     NavigationMainRoute(children: <PageRouteInfo>[
-                  ProfileRoute(),
+                  HomeProfileRoute(),
                 ]));
               },
               child: Center(
